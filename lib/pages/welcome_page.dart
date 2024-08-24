@@ -51,7 +51,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         width: 250,
                         child: AppText(
                           text: "Mountain Hikes to heal you from the inside and get over everything you are going through",
-                          color: AppColors.textColor2,
+                          color: Colors.black,
                           size: 14,
                         ),
                       ),
@@ -79,7 +79,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           borderRadius: BorderRadius.circular(8),
                           color: index == indexDots
                               ? AppColors.mainColor
-                              : AppColors.mainColor.withOpacity(0.3),
+                              : AppColors.mainColor,
                         ),
                       );
                     }),

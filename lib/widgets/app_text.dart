@@ -10,7 +10,7 @@ class AppText extends StatelessWidget {
     Key? key,
     this.size=16,
     required this.text,
-    this.color= Colors.black54,
+    this.color= Colors.black,
   }) : super(key: key);
 
   @override
