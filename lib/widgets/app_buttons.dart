@@ -29,11 +29,11 @@ class AppButtons extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           color: bordercolor,
-          width: 1.0
+          width: 1.0,
         ),
           borderRadius: BorderRadius.circular(15),
-          color: AppColors.buttonBackground),
-      child: isIcon==false?Center(child: AppText(text: text!,color: Colors.black,)):Center(child: Icon(icon,color: color,)),
+          color: backgroundcolor),
+      child: isIcon==false?Center(child: AppText(text: text!,color: color,)):Center(child: Icon(icon,color: color,)),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:havenhub/misc/colors.dart';
 import 'package:havenhub/widgets/app_buttons.dart';
 import 'package:havenhub/widgets/app_largetext.dart';
 import 'package:havenhub/widgets/app_text.dart';
+import 'package:havenhub/widgets/responsive_button.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -143,18 +144,49 @@ class _DetailPageState extends State<DetailPage> {
                                 margin: const EdgeInsets.only(right:10),
                                 child: AppButtons(
                                   size: 50,
-                                  color: Colors.black,
-                                  backgroundcolor: AppColors.buttonBackground,
-                                  bordercolor: AppColors.buttonBackground,
+                                  color: selectedIndex==index?Colors.white:Colors.black,
+                                  backgroundcolor: selectedIndex==index?Colors.black:AppColors.buttonBackground,
+                                  bordercolor: selectedIndex==index?Colors.black:AppColors.buttonBackground,
                                   text: (index+1).toString(),
                                 ),
                               ),
                             );
                             },
                           )
-                      )
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      AppLargeText(text: "Description",color: Colors.black.withOpacity(0.8),size: 20,),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      AppText(text: "You must go for a travel fkjf fgkas fgf dfhbds fsdkbf sdbh sdfhsdf hsdjfh sdjhvsd fjhsdf sdhfb sdfjh",color: AppColors.mainTextColor,),
+
                     ],
                   ),
+                )),
+            Positioned(
+              bottom: 20,
+                left: 20,
+                right: 20,
+                child: Row(
+                  children: [
+                    AppButtons(
+                      size: 60,
+                      color: AppColors.textColor2,
+                      backgroundcolor: Colors.white,
+                      bordercolor: AppColors.textColor1,
+                      isIcon: true,
+                      icon: Icons.favorite_border,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    ResponsiveButton(
+                      isResponsive: true,
+                    )
+                  ],
                 ))
           ],
         ),

@@ -1,29 +1,33 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:havenhub/misc/colors.dart';
+import 'package:havenhub/widgets/app_text.dart';
 
 class ResponsiveButton extends StatelessWidget {
   final bool? isResponsive;
   final double? width;
   final VoidCallback? onPressed; // Add this line
 
-  ResponsiveButton({super.key, this.width, this.isResponsive, this.onPressed});
+  ResponsiveButton({super.key, this.width=120, this.isResponsive, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed, // Add this line
+    return Flexible(
       child: Container(
-        width: width,
-        height: 60,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: AppColors.mainColor,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset("img/button-one.png"),
-          ],
+        child: Container(
+          width:  isResponsive==true?double.maxFinite:width,
+          height: 60,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: AppColors.mainColor,
+          ),
+          child: Row(
+            mainAxisAlignment:  isResponsive==true?MainAxisAlignment.spaceBetween:MainAxisAlignment.center,
+            children: [
+              isResponsive==true?Container(margin:const EdgeInsets.only(left:20),child: AppText(text: "Book Trip Now",color: Colors.white,)):Container(),
+              Image.asset("img/button-one.png"),
+            ],
+          ),
         ),
       ),
     );
