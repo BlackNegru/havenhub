@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:havenhub/admin_page/admin_page.dart';
 import 'package:havenhub/pages/detail_page.dart';
 import 'package:havenhub/pages/login_page.dart';
 import 'package:havenhub/pages/home_page.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: DetailPage(),
     );
   }
 }
