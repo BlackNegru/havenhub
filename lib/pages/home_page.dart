@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:havenhub/misc/colors.dart';
+import 'package:havenhub/pages/faq_page.dart';
+import 'package:havenhub/pages/setting_page.dart';
 import 'package:havenhub/widgets/app_largetext.dart';
 import 'package:havenhub/widgets/app_text.dart';
 
@@ -11,40 +13,106 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  var images={
-    "balloning.png":"Balloning",
-    "hiking.png":"Hiking",
-    "kayaking.png":"Kayaking",
-    "snorkling.png":"Snorkling"
+  var images = {
+    "balloning.png": "Balloning",
+    "hiking.png": "Hiking",
+    "kayaking.png": "Kayaking",
+    "snorkling.png": "Snorkling"
   };
+
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 3, vsync: this);
+
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: Builder(
+          builder: (BuildContext context) => IconButton(
+            icon: Icon(Icons.menu, size: 30, color: Colors.black54),
+            onPressed: () {
+              Scaffold.of(context).openDrawer(); // Open the drawer
+            },
+          ),
+        ),
+        actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 20),
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.grey.withOpacity(0.5),
+            ),
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.help),
+              title: Text('Help'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FAQPage()),
+                );
+              },
+            ),
+            // Uncomment if needed
+            // ListTile(
+            //   leading: Icon(Icons.admin_panel_settings),
+            //   title: Text('Admin Page'),
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => AdminPage()),
+            //     );
+            //   },
+            // ),
+            // ListTile(
+            //   leading: Icon(Icons.pageview),
+            //   title: Text('Page 1'),
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => Page1()),
+            //     );
+            //   },
+            // ),
+          ],
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //menu text
-          Container(
-            padding: const EdgeInsets.only(top: 70, left: 20),
-            child: Row(
-              children: [
-                Icon(Icons.menu, size: 30, color: Colors.black54),
-                Expanded(child: Container()),
-                Container(
-                  margin: const EdgeInsets.only(right: 20),
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.withOpacity(0.5),
-                  ),
-                )
-              ],
-            ),
-          ),
           SizedBox(
-            height: 30,
+            height: 10,
           ),
           //discover text
           Container(
@@ -59,17 +127,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: Align(
               alignment: Alignment.centerLeft,
               child: TabBar(
-                  labelPadding: const EdgeInsets.only(left: 20, right: 20),
-                  controller: _tabController,
-                  labelColor: Colors.black,
-                  unselectedLabelColor: Colors.grey,
-                  isScrollable: true,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  tabs: [
-                    Tab(text: "Places"),
-                    Tab(text: "Inspiration"),
-                    Tab(text: "Emotion"),
-                  ]),
+                labelPadding: const EdgeInsets.only(left: 20, right: 20),
+                controller: _tabController,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                isScrollable: true,
+                indicatorSize: TabBarIndicatorSize.label,
+                tabs: [
+                  Tab(text: "Places"),
+                  Tab(text: "Inspiration"),
+                  Tab(text: "Emotion"),
+                ],
+              ),
             ),
           ),
           Container(
@@ -84,22 +153,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                        margin: const EdgeInsets.only(right: 15, top: 10),
-                        width: 200,
-                        height: 300,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
-                            image: DecorationImage(
-                                image: AssetImage("img/mountain.jpeg"),
-                                fit: BoxFit.cover)));
+                      margin: const EdgeInsets.only(right: 15, top: 10),
+                      width: 200,
+                      height: 300,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                        image: DecorationImage(
+                          image: AssetImage("img/mountain.jpeg"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
                   },
                 )
               ],
             ),
           ),
           SizedBox(
-            height: 30,
+            height: 40,
           ),
           Container(
             margin: const EdgeInsets.only(left: 20, right: 20),
@@ -113,7 +185,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 AppText(
                   text: "See All",
                   color: AppColors.textColor1,
-                )
+                ),
               ],
             ),
           ),
@@ -125,36 +197,40 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             width: double.maxFinite,
             margin: const EdgeInsets.only(left: 20),
             child: ListView.builder(
-                itemCount: 4,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (_, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(right: 30),
-                    child: Column(
-                      children: [
-                        Container(
-                            //margin: const EdgeInsets.only(right: 50),
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.white,
-                                image: DecorationImage(
-                                    image: AssetImage("img/"+images.keys.elementAt(index)),
-                                    fit: BoxFit.cover)
-                            )
+              itemCount: 4,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (_, index) {
+                return Container(
+                  margin: const EdgeInsets.only(right: 30),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          image: DecorationImage(
+                            image: AssetImage("img/" + images.keys.elementAt(index)),
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        SizedBox(height: 10,),
-                        Container(
-                          child: AppText(
-                            text: images.values.elementAt(index),
-                            color: AppColors.textColor2,                             ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        child: AppText(
+                          text: images.values.elementAt(index),
+                          color: AppColors.textColor2,
                         ),
-                      ],
-                    ),
-                  );
-                }),
-          )
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

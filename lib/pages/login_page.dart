@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:havenhub/misc/colors.dart';
+import 'package:havenhub/widgets/app_largetext.dart';
 import 'package:havenhub/widgets/app_text.dart';
 import 'nav_pages/main_page.dart';
 
@@ -8,30 +9,41 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController phoneController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
-        backgroundColor: AppColors.mainColor,
+        title: Row(
+          children: [
+            SizedBox(
+              width: 50,
+            ),
+            Center(
+              child: AppLargeText(
+                text: "Haven Hub",
+                color: AppColors.mainColor.withOpacity(0.8),
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.cyan.withOpacity(0.1),
+        elevation: 0,
       ),
       body: Stack(
         children: [
-          // Background Image
           Positioned.fill(
             child: Image.asset(
-              'img/loginpageimg.jpg', // Replace with your image path
+              'img/loginpageimg.png',
               fit: BoxFit.cover,
             ),
           ),
-          // Transparent Black "Island"
           Center(
             child: Container(
               padding: const EdgeInsets.all(16.0),
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5), // More transparent black
+                color: Colors.deepPurple.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12.0),
                 boxShadow: [
                   BoxShadow(
@@ -44,14 +56,25 @@ class LoginPage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  AppText(text: "Login", size: 24, color: Colors.white),
+                  AppText(
+                    text: "Welcome Back",
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                  SizedBox(height: 10),
+                  AppText(
+                    text: "Enter your credentials below",
+                    size: 16,
+                    color: Colors.white.withOpacity(0.7),
+                  ),
                   SizedBox(height: 20),
                   TextField(
-                    controller: phoneController,
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                      labelText: "Phone Number",
-                      labelStyle: TextStyle(color: Colors.white),
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration:  InputDecoration(
+                      prefixIcon: Icon(Icons.email, color: Colors.white),
+                      labelText: "Email Address",
+                      labelStyle: TextStyle(color: Colors.white,),
                       border: OutlineInputBorder(),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -66,7 +89,8 @@ class LoginPage extends StatelessWidget {
                   TextField(
                     controller: passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration:  InputDecoration(
+                      prefixIcon: Icon(Icons.lock, color: Colors.white),
                       labelText: "Password",
                       labelStyle: TextStyle(color: Colors.white),
                       border: OutlineInputBorder(),
@@ -82,13 +106,22 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: 10),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: TextButton(
+                    child: ElevatedButton(
                       onPressed: () {
-                        // Handle forgot password action
+                        // Handle login action and navigate to MainPage
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MainPage()),
+                        );
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.mainColor.withOpacity(0.4),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 15.0),
+                      ),
                       child: Text(
-                        "Forgot Password?",
-                        style: TextStyle(color: AppColors.mainColor),
+                        "Forgot PassWord",
+                        style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ),
                   ),
@@ -102,11 +135,31 @@ class LoginPage extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.mainColor,
-                      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+                      backgroundColor: AppColors.mainColor.withOpacity(0.4),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 15.0),
                     ),
                     child: Text(
                       "Login",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle login action and navigate to MainPage
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.mainColor.withOpacity(0.4),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 15.0),
+                    ),
+                    child: Text(
+                      "Don't have an account? Sign up",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),

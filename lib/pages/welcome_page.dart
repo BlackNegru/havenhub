@@ -19,7 +19,7 @@ class _WelcomePageState extends State<WelcomePage> {
       "welcome-one.png",
       "welcome-two.png",
       "welcome-three.png",
-      "Welcome-four.png"
+      "welcome-four.png"
     ];
 
     return Scaffold(
@@ -44,15 +44,46 @@ class _WelcomePageState extends State<WelcomePage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AppLargeText(text: "Trips"),
-                      AppText(text: "Views", size: 30),
-                      SizedBox(height: 20),
+                      // Main Title with Background Color and Border
+                      Container(
+                        padding: EdgeInsets.all(5),  // Padding inside the border
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: AppLargeText(
+                          text: "HAVEN HUB",
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      // Subtitle with Background Color and Border
+                      Container(
+                        padding: EdgeInsets.all(5),  // Padding inside the border
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: AppText(
+                          text: "Views",
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      // Description Text with Background Color and Border
                       Container(
                         width: 250,
+                        padding: EdgeInsets.all(5),  // Padding inside the border
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
                         child: AppText(
-                          text: "Mountain Hikes to heal you from the inside and get over everything you are going through",
-                          color: Colors.black,
-                          size: 14,
+                          text: "Travelling anywhere, Travel without concerns",
+                          color: Colors.white,
+                          size: 25,
                         ),
                       ),
                       SizedBox(height: 40),
