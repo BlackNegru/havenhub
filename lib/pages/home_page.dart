@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:havenhub/misc/colors.dart';
-import 'package:havenhub/pages/faq_page.dart';
-import 'package:havenhub/pages/setting_page.dart';
+import 'package:havenhub/pages/menupages/faq_page.dart';
+import 'package:havenhub/pages/menupages/setting_page.dart';
 import 'package:havenhub/widgets/app_largetext.dart';
 import 'package:havenhub/widgets/app_text.dart';
 

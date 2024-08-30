@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../pages/faq_page.dart';
-import '../pages/setting_page.dart';
+import '../pages/menupages/faq_page.dart';
+import '../pages/menupages/setting_page.dart';
 
 class CustomMenuBar extends StatelessWidget {
   @override

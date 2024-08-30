@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:havenhub/pages/nav_pages/bar_item_page.dart';
+import 'package:havenhub/pages/nav_pages/booking_page.dart';
 import 'package:havenhub/pages/home_page.dart';
 import 'package:havenhub/pages/nav_pages/my_page.dart';
 import 'package:havenhub/pages/nav_pages/search_page.dart';
@@ -14,7 +14,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   List pages= [
     HomePage(),
-    BarItemPage(),
+    BookingPage(),
     SearchPage(),
     MyPage(),
 

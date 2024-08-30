@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:havenhub/admin_page/admin_page.dart';
 import 'package:havenhub/misc/colors.dart';
+import 'package:havenhub/pages/detail_page.dart';
 import 'package:havenhub/widgets/app_largetext.dart';
 import 'package:havenhub/widgets/app_text.dart';
 import 'nav_pages/main_page.dart';
@@ -17,11 +19,11 @@ class LoginPage extends StatelessWidget {
         title: Row(
           children: [
             SizedBox(
-              width: 50,
+              width: 75,
             ),
             Center(
               child: AppLargeText(
-                text: "Haven Hub",
+                text: "BEYOND",
                 color: AppColors.mainColor.withOpacity(0.8),
               ),
             ),
@@ -111,7 +113,7 @@ class LoginPage extends StatelessWidget {
                         // Handle login action and navigate to MainPage
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MainPage()),
+                          MaterialPageRoute(builder: (context) => DetailPage()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -150,7 +152,7 @@ class LoginPage extends StatelessWidget {
                       // Handle login action and navigate to MainPage
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MainPage()),
+                        MaterialPageRoute(builder: (context) => AdminPage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(

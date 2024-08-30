@@ -52,7 +52,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: AppLargeText(
-                          text: "HAVEN HUB",
+                          text: "BEYOND",
                           size: 35,
                           color: Colors.white,
                         ),
