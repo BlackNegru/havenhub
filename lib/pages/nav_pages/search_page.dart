@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:havenhub/misc/colors.dart';
+import 'package:havenhub/widgets/app_largetext.dart';
+import 'package:havenhub/widgets/app_text.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
   @override
-  _SearchPageState createState() => _SearchPageState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = "";
-  List<String> _results = [];
+  List<Map<String, String>> searchResults = [];
 
   @override
   void initState() {
     super.initState();
-    // Initialize with some sample data
-    _results = List.generate(20, (index) => 'Item $index');
+    // Example search results; this should be replaced with actual search logic
+    searchResults = [
+      {"title": "Mountain Adventure", "description": "Explore the beautiful mountains."},
+      {"title": "Beach Relaxation", "description": "Relax on pristine beaches."},
+      {"title": "City Tour", "description": "Discover the city landmarks."},
+    ];
   }
 
   void _performSearch(String query) {
-    // Implement your search logic here. For demonstration, we're filtering sample data.
+    // Add actual search logic here
     setState(() {
-      _searchQuery = query;
-      _results = List.generate(20, (index) => 'Item $index').where((item) {
-        return item.toLowerCase().contains(query.toLowerCase());
+      searchResults = searchResults.where((item) {
+        return item['title']!.toLowerCase().contains(query.toLowerCase()) ||
+            item['description']!.toLowerCase().contains(query.toLowerCase());
       }).toList();
     });
   }
@@ -34,72 +39,72 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Search"),
         backgroundColor: AppColors.mainColor,
+        title: AppLargeText(text: "Search", color: Colors.white, size: 32),
         elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(60),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
             child: TextField(
               controller: _searchController,
               onChanged: _performSearch,
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                hintText: 'Search...',
+                hintText: "Search...",
+                prefixIcon: Icon(Icons.search, color: AppColors.mainColor),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.mainColor, width: 2),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
           ),
-        ),
-      ),
-      body: Column(
-        children: [
-          // Optional Filters
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Implement filter logic here
-                  },
-                  child: Text('Filters'),
-                  style: ElevatedButton.styleFrom(
-                  ),
-                ),
-                Text(
-                  'Showing ${_results.length} results',
-                  style: TextStyle(color: Colors.grey[600]),
-                ),
-              ],
-            ),
-          ),
-          // Search Results
           Expanded(
             child: ListView.builder(
-              itemCount: _results.length,
+              padding: const EdgeInsets.all(20),
+              itemCount: searchResults.length,
               itemBuilder: (context, index) {
-                return Card(
-                  margin: const EdgeInsets.all(8.0),
-                  elevation: 5,
-                  child: ListTile(
-                    title: Text(_results[index]),
-                    onTap: () {
-                      // Handle item tap
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Tapped on ${_results[index]}')),
-                      );
-                    },
-                  ),
+                final result = searchResults[index];
+                return SearchResultCard(
+                  title: result['title']!,
+                  description: result['description']!,
                 );
               },
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class SearchResultCard extends StatelessWidget {
+  final String title;
+  final String description;
+
+  const SearchResultCard({
+    required this.title,
+    required this.description,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 15),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      elevation: 5,
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(15),
+        title: AppLargeText(text: title, color: Colors.black),
+        subtitle: AppText(text: description, color: AppColors.textColor2),
       ),
     );
   }

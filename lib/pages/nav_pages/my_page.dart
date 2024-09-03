@@ -9,7 +9,6 @@ class MyPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("My Profile"),
-        backgroundColor:AppColors.mainColor,
         elevation: 0,
         actions: [
           IconButton(

@@ -7,10 +7,10 @@ class BookingPage extends StatefulWidget {
   const BookingPage({super.key});
 
   @override
-  State<BookingPage> createState() => _BookingsPageState();
+  State<BookingPage> createState() => _BookingPageState();
 }
 
-class _BookingsPageState extends State<BookingPage> with TickerProviderStateMixin {
+class _BookingPageState extends State<BookingPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -29,14 +29,14 @@ class _BookingsPageState extends State<BookingPage> with TickerProviderStateMixi
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: AppLargeText(text: "My Bookings",color:Colors.white.withOpacity(0.7)),
-        backgroundColor: AppColors.mainColor,
+        //backgroundColor: Colors.deepPurple.withOpacity(0.7),
+        title: AppLargeText(text: "My Bookings", color: AppColors.bigTextColor,size: 32,),
         elevation: 0,
         bottom: TabBar(
           controller: _tabController,
-          labelColor: Colors.white,
-          unselectedLabelColor: Colors.grey[300],
-          indicatorColor: Colors.white,
+          labelColor: AppColors.mainColor,
+          unselectedLabelColor: AppColors.mainColor,
+          indicatorColor: Colors.black,
           tabs: [
             Tab(text: "Upcoming"),
             Tab(text: "Past"),
@@ -46,63 +46,103 @@ class _BookingsPageState extends State<BookingPage> with TickerProviderStateMixi
       body: TabBarView(
         controller: _tabController,
         children: [
-          // Upcoming Bookings
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: 5, // Replace with your bookings count
-                    itemBuilder: (context, index) {
-                      return Card(
-                        margin: const EdgeInsets.only(bottom: 16.0),
-                        elevation: 5,
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.all(16.0),
-                          title: Text("Booking ${index + 1}"),
-                          subtitle: Text("Details for booking ${index + 1}"),
-                          trailing: Icon(Icons.arrow_forward_ios),
-                          onTap: () {
-                            // Navigate to booking details
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // Past Bookings
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: 3, // Replace with your past bookings count
-                    itemBuilder: (context, index) {
-                      return Card(
-                        margin: const EdgeInsets.only(bottom: 16.0),
-                        elevation: 5,
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.all(16.0),
-                          title: Text("Past Booking ${index + 1}"),
-                          subtitle: Text("Details for past booking ${index + 1}"),
-                          trailing: Icon(Icons.arrow_forward_ios),
-                          onTap: () {
-                            // Navigate to booking details
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
+          UpcomingBookingsTab(),
+          PastBookingsTab(),
         ],
+      ),
+    );
+  }
+}
+
+class UpcomingBookingsTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Example upcoming booking items
+    final upcomingBookings = [
+      {"title": "Yosemite Trek", "date": "2024-09-15", "status": "Confirmed", "image": "img/mountain.jpeg"},
+      {"title": "Snorkeling Adventure", "date": "2024-10-05", "status": "Pending", "image": "img/mountain.jpeg"},
+    ];
+
+    return ListView.builder(
+      padding: const EdgeInsets.all(20),
+      itemCount: upcomingBookings.length,
+      itemBuilder: (context, index) {
+        final booking = upcomingBookings[index];
+        return BookingCard(
+          title: booking['title']!,
+          date: booking['date']!,
+          status: booking['status']!,
+          imagePath: booking['image']!,
+        );
+      },
+    );
+  }
+}
+
+class PastBookingsTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Example past booking items
+    final pastBookings = [
+      {"title": "Hiking in Alps", "date": "2024-07-12", "status": "Completed", "image": "img/mountain.jpeg"},
+      {"title": "Kayaking Trip", "date": "2024-06-20", "status": "Completed", "image": "img/mountain.jpeg"},
+    ];
+
+    return ListView.builder(
+      padding: const EdgeInsets.all(20),
+      itemCount: pastBookings.length,
+      itemBuilder: (context, index) {
+        final booking = pastBookings[index];
+        return BookingCard(
+          title: booking['title']!,
+          date: booking['date']!,
+          status: booking['status']!,
+          imagePath: booking['image']!,
+        );
+      },
+    );
+  }
+}
+
+class BookingCard extends StatelessWidget {
+  final String title;
+  final String date;
+  final String status;
+  final String imagePath;
+
+  const BookingCard({
+    required this.title,
+    required this.date,
+    required this.status,
+    required this.imagePath,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 15),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      elevation: 5,
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(15),
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.asset(
+            imagePath,
+            width: 80,
+            height: 80,
+            fit: BoxFit.cover,
+          ),
+        ),
+        title: AppLargeText(text: title, color: Colors.black),
+        subtitle: AppText(text: "Date: $date", color: AppColors.textColor2),
+        trailing: AppText(
+          text: status,
+          color: status == "Completed" ? Colors.green : (status == "Confirmed" ? Colors.blue : Colors.orange),
+        ),
       ),
     );
   }
