@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: (AppLargeText(text: "Discover")),
           ),
           SizedBox(
-            height: 20,
+            height: 15,
           ),
           //tabbar
           Container(

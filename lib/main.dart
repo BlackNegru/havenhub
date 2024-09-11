@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:havenhub/cubit/app_cubits.dart';
+import 'package:havenhub/pages/detail_page.dart';
+import 'package:havenhub/pages/login_page.dart';
 import 'package:havenhub/pages/menupages/faq_page.dart';
 import 'package:havenhub/pages/nav_pages/main_page.dart';
 import 'package:havenhub/pages/welcome_page.dart';
@@ -19,7 +23,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      home: BlocProvider<AppCubits>(
+          create:(context)=>AppCubits(),
+          child: Container()
+      )
     );
   }
 }

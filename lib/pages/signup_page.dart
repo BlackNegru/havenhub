@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:havenhub/admin_page/admin_page.dart';
 import 'package:havenhub/misc/colors.dart';
-import 'package:havenhub/pages/detail_page.dart';
-import 'package:havenhub/pages/signup_page.dart';
 import 'package:havenhub/widgets/app_largetext.dart';
 import 'package:havenhub/widgets/app_text.dart';
 import 'nav_pages/main_page.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nameController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
+    final TextEditingController phoneController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
@@ -53,15 +52,32 @@ class LoginPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AppText(
-                    text: "Welcome Back",
+                    text: "Create an Account",
                     size: 24,
                     color: Colors.white,
                   ),
                   SizedBox(height: 10),
                   AppText(
-                    text: "Enter your credentials below",
+                    text: "Fill in your details below",
                     size: 16,
                     color: Colors.white.withOpacity(0.7),
+                  ),
+                  SizedBox(height: 20),
+                  TextField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person, color: Colors.white),
+                      labelText: "Full Name",
+                      labelStyle: TextStyle(color: Colors.white),
+                      border: OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                    ),
+                    style: TextStyle(color: Colors.white),
                   ),
                   SizedBox(height: 20),
                   TextField(
@@ -83,6 +99,23 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   TextField(
+                    controller: phoneController,
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.phone, color: Colors.white),
+                      labelText: "Phone Number",
+                      labelStyle: TextStyle(color: Colors.white),
+                      border: OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  TextField(
                     controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -99,32 +132,10 @@ class LoginPage extends StatelessWidget {
                     ),
                     style: TextStyle(color: Colors.white),
                   ),
-                  SizedBox(height: 10),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Handle login action and navigate to DetailPage
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => DetailPage()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.mainColor.withOpacity(0.4),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 15.0),
-                      ),
-                      child: Text(
-                        "Forgot PassWord",
-                        style: TextStyle(color: Colors.white, fontSize: 12),
-                      ),
-                    ),
-                  ),
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      // Handle login action and navigate to MainPage
+                      // Handle sign-up action and navigate to MainPage
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => MainPage()),
@@ -136,26 +147,7 @@ class LoginPage extends StatelessWidget {
                           vertical: 10.0, horizontal: 15.0),
                     ),
                     child: Text(
-                      "Login",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle navigation to AdminPage
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUpPage()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.mainColor.withOpacity(0.4),
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 15.0),
-                    ),
-                    child: Text(
-                      "Don't have an account? Sign up",
+                      "Sign Up",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
