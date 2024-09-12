@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:havenhub/cubit/app_cubit_logics.dart';
 import 'package:havenhub/cubit/app_cubits.dart';
 import 'package:havenhub/pages/detail_page.dart';
 import 'package:havenhub/pages/login_page.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       home: BlocProvider<AppCubits>(
           create:(context)=>AppCubits(),
-          child: Container()
+          child: AppCubitLogics()
       )
     );
   }
